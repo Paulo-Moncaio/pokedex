@@ -1,5 +1,4 @@
 import { Container } from "./styles";
-import img from "../../assets/poke-images/bulbasaur.png"
 
 type Pokemon = {
     pokedexId: String;
@@ -27,7 +26,7 @@ interface PokecardProps {
 
 export function Pokecard({pokemon} : PokecardProps) {
 
-    const pokemonImg = `images/${pokemon.pokedexId}.png`
+    const pokemonImg = `pokeImages/${pokemon.pokedexId}.png`
 
     return (
         // onClick={abrirModal}

@@ -34,7 +34,7 @@ export function Dashboard( props : DashboardProps ) {
 
     const fetchPokemonsByName = async (name: string) => {
         await api
-            .get('/api/pokemon', { params: { name: name } })
+            .get('/api/pokemon', { params: { name } })
             .then((response) => setPokemons(response.data))
         setIsLoading(false);
     };

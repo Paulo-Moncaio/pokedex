@@ -13,10 +13,6 @@ interface queryParams {
 function App() {
   const [query, setQuery] = useState("");
 
-  function handleChangeInput(name:string) {
-    setQuery(name)
-  }
-
   return (
     <>
       <Header 
