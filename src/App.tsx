@@ -1,28 +1,28 @@
 import { GlobalStyle } from './styles/global';
-import logo from './assets/pokedex.png';
 import { Dashboard } from './components/Dashboard';
 import { Header } from './components/Header';
-import { Pokecard } from './components/Pokecard';
-import React, { ReactComponentElement, useState } from 'react';
+import { useState } from 'react';
+import { SelectedTypeContext, SelectedTypeProvider } from './context/SelectedTypeContext';
 
 interface queryParams {
   name: string,
-  type1: string,
 }
 
 function App() {
   const [query, setQuery] = useState("");
 
   return (
-    <>
+    <SelectedTypeProvider >
+
       <Header 
         onChangeInputText={(e:React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)} 
         inputValue={query}
-      />
+        />
       <Dashboard name={query} />
 
       <GlobalStyle />
-    </>
+    
+    </SelectedTypeProvider>
   );
 }
 

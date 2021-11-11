@@ -1,20 +1,15 @@
-import { type } from "os";
 import { useState } from "react";
 import { Container } from "./styles";
 
 interface PokeButtonProps {
   type: string
+  onClickTypeButton: () => void
+  selected: string
 }
 
-export function PokeButton({type} : PokeButtonProps) {
-  const [isSelected, setIsSelected] = useState(false)
-
-  function handleOnClick() {
-    
-  }
-
+export function PokeButton({type, onClickTypeButton, selected} : PokeButtonProps) {
   return(
-    <Container className={type} onClick={handleOnClick} >
+    <Container className={`${type} ${selected === type ? 'selected' : ''}`} onClick={onClickTypeButton}  >
       {type}
       <img src={`pokeTypes/type-${type}-badge.png`} alt="" />
     </Container>

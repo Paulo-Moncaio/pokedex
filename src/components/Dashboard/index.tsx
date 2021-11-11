@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { Pokecard } from "../Pokecard";
 import { Container } from "./styles";
 import ReactLoading from 'react-loading';
+import { SelectedTypeContext } from "../../context/SelectedTypeContext";
 
 type Pokemon = {
     pokedexId: String;
@@ -25,45 +26,42 @@ type Pokemon = {
 }
 
 interface DashboardProps {
-    name: string,
+    name: String,
+    // type: string
 }
 
-export function Dashboard( props : DashboardProps ) {
+export function Dashboard( { name } : DashboardProps ) {
     const [pokemons, setPokemons] = useState<Pokemon[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const selectedType = useContext(SelectedTypeContext)
+    console.log("type: " + selectedType);
+    console.log(typeof selectedType);
+    
 
-    const fetchPokemonsByName = async (name: string) => {
+    const fetchPokemons = async (name: String, selectedType: String) => {
         await api
-            .get('/api/pokemon', { params: { name } })
+            .get('/api/pokemon', { params: { name, type1: selectedType } })
             .then((response) => setPokemons(response.data))
         setIsLoading(false);
     };
 
     useEffect(() => {
         setIsLoading(true);
-        fetchPokemonsByName(props.name);
-    }, [props.name])
-
-    const items = pokemons.map((pokemon, index) => {
-        console.log(pokemon);
-        
-        return (
-            <Pokecard key={index} pokemon={pokemon} />
-        )
-    })
+        fetchPokemons(name, selectedType);
+    }, [name])
 
     // if(isLoading){
     //     return <ReactLoading type="spinningBubbles" />
     // }
 
     return (
-        <>
+        
         <Container>
-            {isLoading && <ReactLoading className="loading" type="spinningBubbles" />}
-            {pokemons.map((pokemon, index) => (
+            {isLoading && <ReactLoading className="loading" type="spinningBubbles"/>}
+            {!isLoading && pokemons.map((pokemon, index) => (
                 <Pokecard key={index} pokemon={pokemon} />
                 ))}
         </Container>
-        </>
+         
     )
 }

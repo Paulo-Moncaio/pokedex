@@ -9,15 +9,18 @@ export const Container = styled.button`
   text-align: center;
   display: flex;
   align-items: center;
+  filter: opacity(0.5);
+  transition: filter 0.2s;
 
   img{
     width: 1.5rem;
     margin: 0;
     padding: 0;
     padding-left: 0.25rem;
-    filter: brightness(100) ;
+    filter: brightness(1000) ;
   }
 
+  
   &.normal{
     background: #A8A77A;
   }
@@ -72,5 +75,10 @@ export const Container = styled.button`
   &.fairy{
     background: #D685AD;
   }
+
+  &.selected{
+    filter: opacity(1);
+  }
+
 `;
 
